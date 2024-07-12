@@ -1,4 +1,4 @@
-[chines](./README_ZM.md)
+[chines](./README_ZN.md)
 
 # rust-note
 
