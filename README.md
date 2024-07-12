@@ -1,3 +1,5 @@
+[chines](./README_ZM.md)
+
 # rust-note
 
 # Learning Plan for Rust
