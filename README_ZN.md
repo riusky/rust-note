@@ -1,6 +1,6 @@
 # Rust 笔记
 
-> 目前已经实现了 Rust Axum 的Rsa,Aes,Sha3摘要算法,JWT,自定义的JsonRPC等,用于服务器网络的通信。
+> 目前已经实现了 Rust Axum 的Rsa,Aes,Sha3摘要算法,JWT,自定义的JsonRPC等,用于服务器网络的通信。 
 
 # 学习 Rust 的计划
 
