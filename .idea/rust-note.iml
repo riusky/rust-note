@@ -4,8 +4,10 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/a01_vector_demo/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/a02_HashMap/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/a03_life_cryle/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/a01_vector_demo/target" />
       <excludeFolder url="file://$MODULE_DIR$/a02_HashMap/target" />
+      <excludeFolder url="file://$MODULE_DIR$/a03_life_cryle/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
