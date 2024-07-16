@@ -12,20 +12,19 @@ fn main() {
             &*x
         }
     }
-// 'a: 'b
+    // 'a: 'b
 // 假设有两个引用 &'a i32 和 &'b i32，它们的生命周期分别是 'a 和 'b，若 'a >= 'b，
 // 则可以定义 'a:'b，表示 'a 至少要活得跟 'b 一样久。
-    struct DoubleRef<'a,'b:'a, T> {
+    struct DoubleRef<'a, 'b: 'a, T> {
         r: &'a T,
-        s: &'b T
+        s: &'b T,
     }
-
 
     /* 类型也可以用生命周期来限制 */
     // T: 'a
     // 表示类型 T 必须比 'a 活得要久：
     struct Ref<'a, T: 'a> {
-        r: &'a T
+        r: &'a T,
     }
     /// 因为结构体字段 r 引用了 T，
     /// 因此 r 的生命周期 'a 必须要比 T 的生命周期更短(被引用者的生命周期必须要比引用长)。
@@ -36,10 +35,6 @@ fn main() {
     /// struct Ref<'a, T> {
     //     r: &'a T
     // }
-
-
-
-
 
     let mut list = List {
         manager: Manager {
@@ -57,37 +52,38 @@ fn main() {
 
     // 首先在直觉上，list.get_interface() 借用的可变引用，按理来说应该在这行代码结束后，就归还了，
     // 但是为什么还能持续到 use_list(&list) 后面呢？
-/// 这是因为我们在 get_interface 方法中声明的 lifetime 有问题，
-/// 该方法的参数的生命周期是 'a，而 List 的生命周期也是 'a，
-/// 说明该方法至少活得跟 List 一样久，再回到 main 函数中，
-/// list 可以活到 main 函数的结束，因此 list.get_interface() 借用的可变引用也会活到 main 函数的结束，
-/// 在此期间，自然无法再进行借用了。
-
 }
+
 fn use_list(list: &List) {
     println!("{}", list.manager.text);
 }
+
 struct Interface<'b, 'a: 'b> {
-    manager: &'b mut Manager<'a>
+    manager: &'b mut Manager<'a>,
 }
 
 impl<'b, 'a: 'b> Interface<'b, 'a> {
-    pub fn noop(self) {
+    pub fn noop(&'b self) {
         println!("interface consumed");
     }
 }
 
 struct Manager<'a> {
-    text: &'a str
+    text: &'a str,
 }
 
 struct List<'a> {
     manager: Manager<'a>,
 }
 
+
+/* &'b mut self 这里为什么是'b */
+/// 借用的生命周期肯定小于本身的生命周期
+/// 注意 我是说注意 在这个方法内的 manager: &mut self.manager 应该具有和本身不一样的生命周期
+/// 即小于本身的生命周期 所以有 'a:'b 的限制
 impl<'a> List<'a> {
-    pub fn get_interface<'b>(&'a mut self) -> Interface<'b, 'a>
-    where 'a:'b {
+    pub fn get_interface<'b>(&'b mut self) -> Interface<'b, 'a>
+        where 'a: 'b {
         Interface {
             manager: &mut self.manager
         }
