@@ -6,10 +6,12 @@
       <sourceFolder url="file://$MODULE_DIR$/a02_HashMap/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/a03_life_cryle/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/a04_advance_lifecryle/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/a05_functional_programming/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/a01_vector_demo/target" />
       <excludeFolder url="file://$MODULE_DIR$/a02_HashMap/target" />
       <excludeFolder url="file://$MODULE_DIR$/a03_life_cryle/target" />
       <excludeFolder url="file://$MODULE_DIR$/a04_advance_lifecryle/target" />
+      <excludeFolder url="file://$MODULE_DIR$/a05_functional_programming/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
