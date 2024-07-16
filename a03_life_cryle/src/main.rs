@@ -92,3 +92,49 @@ impl<'a> ImportantExcerpt<'a> {
         3
     }
 }
+
+
+
+impl<'a> ImportantExcerpt<'a> {
+    fn announce_and_return_part<'b>(&'a self, announcement: &'b str) -> &'b str
+        where
+            'a: 'b, // 'a: 'b，是生命周期约束语法，跟泛型约束非常相似，用于说明 'a 必须比 'b 活得久
+    {
+        println!("Attention please: {}", announcement);
+        self.part
+    }
+}
+
+
+
+/* 静态生命周期 */
+
+// 在 Rust 中有一个非常特殊的生命周期，那就是 'static，拥有该生命周期的引用可以和整个程序活得一样久。
+// 不用考虑生命周期失效 但是一般不使用
+fn staticlife() {
+
+let s: &'static str = "我没啥优点，就是活得久，嘿嘿";
+}
+// 生命周期 'static 意味着能和程序活得一样久，例如字符串字面量和特征对象
+// 实在遇到解决不了的生命周期标注问题，可以尝试 T: 'static，有时候它会给你奇迹
+
+
+/* 一个复杂例子: 泛型、特征约束 */
+
+use std::fmt::Display;
+
+fn longest_with_an_announcement<'a, T>(
+    x: &'a str,
+    y: &'a str,
+    ann: T,
+) -> &'a str
+    where
+        T: Display,
+{
+    println!("Announcement! {ann}");
+    if x.len() > y.len() {
+        x
+    } else {
+        y
+    }
+}
